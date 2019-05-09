@@ -1,0 +1,30 @@
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %highlight([%-5level]) %logger{36}- %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="AUDIT" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>com.mysql.cj.jdbc.Driver</driverClass>
+            <url>jdbc:mysql://127.0.0.1:3306</url>
+            <user>user</user>
+            <password>password1234</password>
+        </connectionSource>
+    </appender>
+
+    <logger name="com.glqdlt" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="com.glqdlt.ex.logbackcustomappender.audit">
+        <appender-ref ref="AUDIT"/>
+    </logger>
+    <root level="error">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
